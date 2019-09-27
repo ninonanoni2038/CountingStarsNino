@@ -1,0 +1,23 @@
+<nav>
+	<div class="inner-nav">
+		<a class="logo" href="/">
+			<%# <img src="/assets/images/counting_stars_logo2.png"> %>
+		</a>
+		<div class="left">
+			<form action="/search" method="get">
+				<input type="text" placeholder="word" name="search">
+				<input type="submit" value="Search">
+			</form>
+				<div class="mypage">
+					<a href="/user/<%= User.find(session[:user]).id %>"><span class="glyphicon glyphicon-search" aria-hidden="true"></span> <%= User.find(session[:user]).username %></a>
+				</div>
+				<a href="/signout">Signout</a>
+
+		</div>
+	</div>
+</nav>
+<form action="/new" method="post" enctype="multipart/form-data" class="new">
+  <input type="text" name="title" class="new-page_input">
+  <input type="file" name="file" >
+  <input type="submit" value="send" class="send-button">
+</form>

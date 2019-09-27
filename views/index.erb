@@ -1,0 +1,43 @@
+<nav>
+	<div class="inner-nav">
+		<a class="logo" href="/">
+			<%# <img src="/assets/images/counting_stars_logo2.png"> %>
+		</a>
+		<div class="left">
+			<form action="/search" method="get">
+				<input type="text" placeholder="word" name="search">
+				<input type="submit" value="Search">
+			</form>
+				<div class="mypage">
+					<a href="/user/<%= User.find(session[:user]).id %>"><span class="glyphicon glyphicon-search" aria-hidden="true"></span> <%= User.find(session[:user]).username %></a>
+				</div>
+				<a href="/signout">Signout</a>
+
+		</div>
+	</div>
+</nav>
+<main>
+	<div class="link-to-new-wrapper">
+				<a href="/new" class="link-to-new">CREATE NEW COUNT</a>
+		</div>
+</main>
+<div class="area-counters-wrapper">
+	<div class="area-counters">
+		<% @counts.each do |count|%>
+		<div class="counter">
+			<a class="inner-counter" href="/counts/<%= count.id %>">
+				<div class="thumbnail">
+					<div class="image" style="background-image: url(<%= count.countimage %>);height:100px"></div>
+					<h2 class="name"><%= count.name %></h2>
+					<h1 class="number"><%= count.number %></h1>
+					<p class="username"><%= User.find(count.user_id).username %></p>
+					<p class="postdate"><%= count.created_at %></p>
+				</div>
+				<form class="button" action="/counts/<%= count.id %>/add" method="post">
+					<input type="submit" value="+">
+				</form>
+			</a>
+		</div>
+		<% end %>
+	</div>
+</div>
