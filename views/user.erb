@@ -1,7 +1,7 @@
 <nav>
 	<div class="inner-nav">
 		<a class="logo" href="/">
-			<%# <img src="/assets/images/counting_stars_logo2.png"> %>
+			<img src="/assets/images/counting_stars_logo2.png">
 		</a>
 		<div class="left">
 			<form action="/search" method="get">
@@ -17,7 +17,7 @@
 	</div>
 </nav>
 <div class="user_page-board">
-  <img src="<%= @user.userimage %>" alt="" class="user_page-icon"style="height:100px">
+  <img src="<%= @user.userimage %>" alt="" class="user_page-icon">
   <p class="user_page-name">Nino</p>
 </div>
 <div class="area-counters-wrapper">
@@ -25,7 +25,7 @@
       <% @counts.each do |count| %>
         <% if !@usercounts.find_by(count_id:count.id).nil? %>
         <div class="counter">
-          <a class="inner-counter" href="/counts/">
+          <a class="inner-counter" href="/counts/<%= count.id %>">
             <div class="thumbnail">
               <div class="image" style="background-image: url(<%= count.countimage %>)"></div>
               <h2 class="name"><%= count.name %></h2>

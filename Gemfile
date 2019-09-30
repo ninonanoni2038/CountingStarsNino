@@ -12,8 +12,15 @@ gem 'sinatra-contrib'
 gem 'sinatra-activerecord'
 gem 'activerecord' , '5.2.3'
 gem 'rake'
-gem 'sqlite3'
 gem 'bcrypt'
 
 gem 'cloudinary'
 gem 'dotenv'
+
+group :production do
+  gem 'pg', '~> 0.21.0'
+end
+
+group :development do
+  gem 'sqlite3' , '1.4.1'
+end

@@ -1,7 +1,7 @@
 <nav>
 	<div class="inner-nav">
 		<a class="logo" href="/">
-			<%# <img src="/assets/images/counting_stars_logo2.png"> %>
+			<img src="/assets/images/counting_stars_logo2.png">
 		</a>
 		<div class="left">
 			<form action="/search" method="get">
@@ -15,25 +15,27 @@
 		</div>
 	</div>
 </nav>
-
-<main style="background-image: url(<%= @count.countimage %>);height:100px)">
+<div id="detail">
+<main style="background-image: url(<%= @count.countimage %>)">
 		<div class="wrapper-back-button">
 			<a href="/" class="back-button">back</a>
 		</div>
 		<div class="header">
-
-				<form action="/counts/<%= @count.id - 1 %>" method="get">
-					<input type="submit" value="<">
-				</form>
+				<% if @count.id > 0 %>
+					<form action="/counts/<%= @count.id - 1 %>" method="get">
+						<input type="submit" value="<">
+					</form>
+				<% end %>
 
 			<h2 class="name"><%= @count.name %></h2>
-
-				<form action="/counts/<%= @count.id + 1 %>" method="get">
-					<input type="submit" value=">">
-				</form>
+				<% if @count.id < Count.count %>
+					<form action="/counts/<%= @count.id + 1 %>" method="get">
+						<input type="submit" value=">">
+					</form>
+				<% end %>
 
 		</div>
-		<p class="postdate">from <%= @count.created_at %> </p>
+		<p class="postdate">from <%= @count.created_at.strftime('%Y/%m/%d') %> </p>
 		<h1 class="number"><%= @count.number %></h1>
 		<form class="button" action="/counts-detail/<%= @count.id %>/add" method="post">
 			<input type="submit" value="+">
@@ -52,3 +54,4 @@
       <% end %>
 		</div>
 	</main>
+	</div>

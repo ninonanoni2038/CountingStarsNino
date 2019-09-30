@@ -13,6 +13,11 @@ before do
     config.api_key = ENV['CLOUDINARY_API_KEY']
     config.api_secret = ENV['CLOUDINARY_API_SECRET']
   end
+  if request.path_info == "/"
+    if session[:user] == nil
+      redirect '/signin'
+    end
+  end
 end
 
 get '/' do
@@ -60,7 +65,6 @@ get '/new' do
   erb :new
 end
 
-
 post '/new' do
   img_url = ''
   if params[:file]
@@ -101,4 +105,9 @@ get  '/user/:id' do
   @counts = Count.all
   @usercounts = UserCount.where(user_id: params[:id])
   erb :user
+end
+
+get '/search' do
+  @counts = Count.where(name: params[:search])
+  erb :index
 end
